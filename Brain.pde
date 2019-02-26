@@ -1,3 +1,5 @@
+int ligandNetrin = 1, ligandDraxin = 2;
+
 class Brain {
   int shrinkMod = 8; // this is used so we don't go out of bounds within our window
   int clusterSizes = 200;
@@ -119,5 +121,26 @@ class Brain {
   
   void growNeuron() {
     neurons.add(new Neuron(makeUniqueColour(), neurons.size()));
+  }
+  
+  float getLigandConcentrationAt(int x, int y, int ligandAttraction) {
+    loadPixels();
+    
+    float distanceNetrin = abs(y - (height - (height / shrinkMod) - (ligandPatchSize / 2)));
+    float concentrationNetrin = (height - distanceNetrin) / height;
+    
+    float distanceDraxin = abs(y - ((height / shrinkMod) + (ligandPatchSize / 2)));
+    float concentrationDraxin = (height - distanceDraxin) / height;
+    
+    float[] concentrationMatrix = {concentrationNetrin, concentrationDraxin};
+    float[] attractionMatrix = (ligandAttraction == ligandNetrin) ? {-2, -1} : {-2, 2};
+    
+    println("netrin=" + concentrationNetrin + ";draxin=" + concentrationDraxin);
+    
+    return float(0);
+  }
+  
+  float logisticSigmoid(float x) {
+    return ((float) exp(x) / (float) (exp(x) + 1));
   }
 }

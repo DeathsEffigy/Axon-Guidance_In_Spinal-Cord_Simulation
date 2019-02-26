@@ -1,4 +1,4 @@
-int neuronTypeCaudal = 0, neuronTypeRostral = 1;
+int neuronTypeCommissural = 0, neuronTypeTrochear = 1;
 
 class Neuron {
   color colour;
@@ -19,8 +19,7 @@ class Neuron {
     dendrite = new Dendrite(this);
   }
   
-  float[] getOrientationRatio() {
-    float r = float(orientation);
+  float[] getOrientationRatio(float r) {
     float rX = 0;
     float rY = 0;
     float[] ret = new float[2];
