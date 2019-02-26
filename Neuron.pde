@@ -19,7 +19,7 @@ class Neuron {
     dendrite = new Dendrite(this);
   }
   
-  float[] getOrientationRatio(float r) {
+  /*float[] getOrientationRatio(float r) {
     float rX = 0;
     float rY = 0;
     float[] ret = new float[2];
@@ -60,7 +60,7 @@ class Neuron {
     ret[0] = rX;
     ret[1] = rY;
     return ret;
-  }
+  }*/
   
   boolean isSameColourAs(color contender) {
     return (colour == contender);

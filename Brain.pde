@@ -123,21 +123,22 @@ class Brain {
     neurons.add(new Neuron(makeUniqueColour(), neurons.size()));
   }
   
+  /* the higher returned concentration value, the more ligands in surrounding CSF and the closer to target */
   float getLigandConcentrationAt(int x, int y, int ligandAttraction) {
-    loadPixels();
-    
     float distanceNetrin = abs(y - (height - (height / shrinkMod) - (ligandPatchSize / 2)));
     float concentrationNetrin = (height - distanceNetrin) / height;
     
     float distanceDraxin = abs(y - ((height / shrinkMod) + (ligandPatchSize / 2)));
     float concentrationDraxin = (height - distanceDraxin) / height;
     
-    float[] concentrationMatrix = {concentrationNetrin, concentrationDraxin};
-    float[] attractionMatrix = (ligandAttraction == ligandNetrin) ? {-2, -1} : {-2, 2};
+    int netrinMod = (ligandAttraction == ligandNetrin) ? 1 : -1;
+    int draxinMod = (ligandAttraction == ligandNetrin) ? -1 : 1;
     
-    println("netrin=" + concentrationNetrin + ";draxin=" + concentrationDraxin);
+    float concentration = (concentrationDraxin + 1) * draxinMod + (concentrationNetrin + 1) * netrinMod;
     
-    return float(0);
+    //println("attracted to " + (ligandAttraction == ligandNetrin ? "netrin" : "draxin") + " w con=" + concentration);
+    
+    return concentration;
   }
   
   float logisticSigmoid(float x) {
